@@ -191,6 +191,23 @@ mod tests {
         assert_eq!(vec!("Alice", "Bob"), sales_list);
     }
 
+    /// if we add "alice" twice, what should happen? we could choose
+    /// from a couple choices: just do nothing special and leave only
+    /// one "alice" in the array? throw an exception? put two "alice" in?
+    /// ah forget it.  not imporant because there's no real need behind things.
+    /// we'll just double up "alice"
+    #[test]
+    fn test_should_correctly_handle_adding_same_name_twice() {
+        let mut my_company = Company::new();
+        my_company.process_command("Add Alice to Engineering");
+        my_company.process_command("Add Alice to Engineering");
+
+        let eng_list: Vec<String> =
+            my_company.get_list_of_department_people(Department::ENGINEERING);
+
+        assert_eq!(vec!("Alice", "Alice"), eng_list);
+    }
+
     #[test]
     fn test_should_enable_adding_three_employees_to_department() {
         let mut my_company = Company::new();
