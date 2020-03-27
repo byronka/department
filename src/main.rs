@@ -17,6 +17,7 @@ struct Company {
 
 impl Company {
 
+    /// construct a new Company.  Builds a singleton database
     fn new() -> Company {
 
         let mut employees = HashMap::new();
@@ -26,6 +27,9 @@ impl Company {
         Company { employees: employees }
     }
 
+    /// break a sentence into multiple parts.  For example, give
+    /// a sentence like "this is a string", you will get
+    /// a vector containing "this","is","a","string"
     fn tokenize(text: &String) -> Vec<String> {
             let mut return_vector: Vec<String> = Vec::new();
             let mut count = 0;
@@ -44,6 +48,9 @@ impl Company {
             return_vector
     }
 
+    /// processes commands by users.  Currently, the only
+    /// command accepted is:
+    ///   Add <name> to <engineering or sales>
     fn process_command(&mut self, text: &str) {
         // break the text into tokens
         let tokens: Vec<String> = Company::tokenize(&text.to_string());
@@ -74,6 +81,8 @@ impl Company {
     }
 
 
+    /// return a list of all the people who are currently affiliated with
+    /// a given department.
     fn get_list_of_department_people(&self, dep: Department) -> Vec<String>{
         let result = self.employees.get(&dep);
         match result {
